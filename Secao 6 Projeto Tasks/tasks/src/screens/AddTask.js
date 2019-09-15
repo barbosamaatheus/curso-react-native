@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+    Modal,
     View,
     Text,
     TextInput,
@@ -21,7 +22,7 @@ export default class AddTask extends Component {
     state = { ...initialState }
 
     save = () => {
-        if (!this.state.desc.trim) {
+        if (!this.state.desc.trim()) {
             Alert.alert('Dados inválidos', 'Informe uma descrição para a tarefa')
             return
         }
@@ -67,15 +68,15 @@ export default class AddTask extends Component {
                 onRequestClose={this.props.onCancel}
                 visible={this.props.isVisible}
                 animationType='slide'
-                trasparent={true}>
+                transparent={true}>
                 <TouchableWithoutFeedback onPress={this.props.onCancel}>
-                    <View style={styles.offset} />
+                    <View style={styles.offset}></View>
                 </TouchableWithoutFeedback>
                 <View style={styles.container}>
-                    <Text styles={styles.header}>Nova Tarefa!</Text>
+                    <Text style={styles.header}>Nova Tarefa!</Text>
                     <TextInput
-                        styles={styles.input}
-                        placeholder="Descrição.."
+                        placeholder="Descrição..."
+                        style={styles.input}
                         onChangeText={desc => this.setState({ desc })}
                         value={this.state.desc} />
                     {datePicker}
@@ -83,33 +84,32 @@ export default class AddTask extends Component {
                         <TouchableOpacity onPress={this.props.onCancel}>
                             <Text style={styles.button}>Cancelar</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={this.props.onSave}>
+                        <TouchableOpacity onPress={this.save}>
                             <Text style={styles.button}>Salvar</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
                 <TouchableWithoutFeedback onPress={this.props.onCancel}>
-                    <View style={styles.offset} />
+                    <View style={styles.offset}></View>
                 </TouchableWithoutFeedback>
-
             </Modal>
         )
     }
 }
 
-const styles = StyleSheet.create({
+var styles = StyleSheet.create({
     container: {
         backgroundColor: 'white',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
     },
     offset: {
         flex: 1,
-        backgroundColor: 'rgba(0,0,0,0.7)'
+        backgroundColor: 'rgba(0,0,0,0.7)',
     },
     button: {
         margin: 20,
         marginRight: 30,
-        color: commonStyles.colors.default
+        color: commonStyles.colors.default,
     },
     header: {
         fontFamily: commonStyles.fontFamily,
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
         color: commonStyles.colors.secondary,
         textAlign: 'center',
         padding: 15,
-        fontSize: 15
+        fontSize: 15,
     },
     input: {
         fontFamily: commonStyles.fontFamily,
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         backgroundColor: 'white',
         borderWidth: 1,
-        borderColor: 'E3E3E3',
+        borderColor: '#e3e3e3',
         borderRadius: 6
     },
     date: {
@@ -135,6 +135,6 @@ const styles = StyleSheet.create({
         fontSize: 20,
         marginLeft: 10,
         marginTop: 10,
-        textAlign: 'center'
+        textAlign: 'center',
     }
 })
