@@ -7,6 +7,7 @@ import {
     FlatList,
     TouchableOpacity,
     Platform,
+    AsyncStorage
 } from 'react-native'
 
 import Icon from 'react-native-vector-icons/FontAwesome'
@@ -37,6 +38,7 @@ export default class Agenda extends Component {
             estimateAt: task.date,
             doneAt: null
         })
+        this.setState({ tasks, showAddTask: false }, this.filterTasks)
     }
 
     filterTasks = () => {
@@ -48,6 +50,7 @@ export default class Agenda extends Component {
             visibleTasks = this.state.tasks.filter(pending)
         }
         this.setState({ visibleTasks })
+        AsyncStorage.setItem('tasks', JSON.stringify(this.state.tasks))
     }
 
     deleteTask = id => {
@@ -70,8 +73,10 @@ export default class Agenda extends Component {
         this.setState({ tasks }, this.filterTasks)
     }
 
-    componentDidMount = () => {
-        this.filterTasks()
+    componentDidMount = async () => {
+        const data = await AsyncStorage.getItem('tasks')
+        const tasks = JSON.parse(data) || []
+        this.setState({ tasks }, this.filterTasks)
     }
 
     render() {

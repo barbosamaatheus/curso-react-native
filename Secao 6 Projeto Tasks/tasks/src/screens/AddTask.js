@@ -21,11 +21,14 @@ export default class AddTask extends Component {
 
     state = { ...initialState }
 
+    state = { ...initialState }
+
     save = () => {
         if (!this.state.desc.trim()) {
             Alert.alert('Dados inválidos', 'Informe uma descrição para a tarefa')
             return
         }
+
         const data = { ...this.state }
         this.props.onSave(data)
         this.setState({ ...initialState })
