@@ -3,6 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "emu5X": "emulator -avd Nexus_5X_API_28",
+    "run-a": "react-native run-android",
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint ."
@@ -12,6 +14,7 @@
     "react": "16.8.6",
     "react-native": "0.60.5",
     "react-native-action-button": "^2.8.5",
+    "react-native-swipeable": "^0.6.0",
     "react-native-vector-icons": "^6.6.0"
   },
   "devDependencies": {
