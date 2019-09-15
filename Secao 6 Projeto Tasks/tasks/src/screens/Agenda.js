@@ -1,11 +1,25 @@
 import React, { Component } from 'react';
-import { View, Text, ImageBackground, StyleSheet, FlatList, TouchableOpacity, Platform } from 'react-native'
+import {
+    View,
+    Text,
+    ImageBackground,
+    StyleSheet,
+    FlatList,
+    TouchableOpacity,
+    Platform,
+} from 'react-native'
+
 import Icon from 'react-native-vector-icons/FontAwesome'
+import ActionButton from 'react-native-action-button'
+
 import moment from 'moment'
 import 'moment/locale/pt-br'
+
 import todayImage from '../../assets/imgs/today.jpg'
 import commonStyle from '../commonStyle'
+
 import Task from '../components/Task'
+import AddTask from './AddTask'
 
 export default class Agenda extends Component {
     state = {
@@ -84,7 +98,18 @@ export default class Agenda extends Component {
             },
         ],
         visibleTasks: [],
-        showDoneTasks: true
+        showDoneTasks: true,
+        showAddTask: false
+    }
+
+    AddTask = task => {
+        const tasks = [...this.state.tasks]
+        tasks.push({
+            id: Math.random(),
+            desc: task.desc,
+            estimateAt: task.date,
+            doneAt: null
+        })
     }
 
     filterTasks = () => {
@@ -120,6 +145,10 @@ export default class Agenda extends Component {
     render() {
         return (
             <View style={styles.container}>
+                <AddTask
+                    isVisible={this.state.showAddTask}
+                    onSave={this.AddTask}
+                    onCancel={() => this.setState({ showAddTask: false })} />
                 <ImageBackground
                     source={todayImage}
                     style={styles.background}>
@@ -144,6 +173,9 @@ export default class Agenda extends Component {
                         keyExtractor={item => `${item.id}`}
                         renderItem={({ item }) => <Task {...item} toggleTask={this.toggleTask} />} />
                 </View>
+                <ActionButton
+                    buttonColor={commonStyle.colors.today}
+                    onPress={() => this.setState({ showAddTask: true })} />
             </View>
         )
     }
