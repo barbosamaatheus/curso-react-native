@@ -9,7 +9,9 @@ import {
     Alert
 } from 'react-native';
 import commonStyle from '../commonStyle';
-import backgoundImage from '../../assets/imgs/login.jpg'
+import backgoundImage from '../../assets/imgs/login.jpg';
+import AuthInput  from '../components/AuthInput';
+
 
 export default class Auth extends Component {
     state = {
@@ -47,32 +49,38 @@ export default class Auth extends Component {
                             'Crie a sua conta' : 'Informe seus dados'}
                     </Text>
                     {this.state.stageNew &&
-                        <TextInput
+                        <AuthInput
+                            icon='user'
                             placeholder='Nome'
                             style={styles.input}
                             value={this.state.name}
                             onChangeText={name => this.setState({ name })}>
-                        </TextInput>
+                        </AuthInput>
                     }
-                    <TextInput
+                    <AuthInput
+                        icon='at'
                         placeholder='E-mail'
                         style={styles.input}
                         value={this.state.email}
                         onChangeText={email => this.setState({ email })}>
-                    </TextInput>
-                    <TextInput
+                    </AuthInput>
+                    <AuthInput
+                        icon='lock'
+                        secureTextEntry={true}
                         placeholder='Senha'
                         style={styles.input}
                         value={this.state.password}
                         onChangeText={password => this.setState({ password })}>
-                    </TextInput>
+                    </AuthInput>
                     {this.state.stageNew &&
-                        <TextInput
+                        <AuthInput
+                            icon='asterisk'
+                            secureTextEntry={true}
                             placeholder='Confirmação'
                             style={styles.input}
                             value={this.state.confirmPassword}
                             onChangeText={confirmPassword => this.setState({ confirmPassword })}>
-                        </TextInput>
+                        </AuthInput>
                     }
                     <TouchableOpacity onPress={this.signinOrSignup}>
                         <View style={styles.button}>
