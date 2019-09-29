@@ -85,7 +85,7 @@ export default class Auth extends Component {
                 </View>
                 <TouchableOpacity
                     style={{ padding: 10 }}
-                    onPress={() => this.setState({ stageNew: !stageNew })}>
+                    onPress={() => this.setState({ stageNew: !this.state.stageNew })}>
                     <Text style={styles.buttonText}>
                         {this.state.stageNew ? 'Já possui conta?' : 'Criar uma conta'}
                     </Text>
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     },
     formContainer: {
         backgroundColor: 'rgba(0,0,0,0.8)',
-        padding: '20',
+        padding: 20,
         width: '90%'
     },
     input: {
