@@ -7,7 +7,8 @@ import {
 
 import commonStyle from './commonStyle';
 
-import Menu from './screens/Menu'
+import Menu from './screens/Menu';
+import AuthOrApp from './screens/AuthOrApp'
 import Agenda from './screens/Agenda';
 import Auth from './screens/Auth';
 
@@ -65,11 +66,12 @@ const menuNavigator = createAppContainer(
 const MainRoutes = createAppContainer(
   createSwitchNavigator(
     {
+      Loading: AuthOrApp,
       AuthLoading: Auth,
       Home: menuNavigator,
     },
     {
-      initialRouteName: 'AuthLoading',
+      initialRouteName: 'Loading',
     },
   ),
 );
